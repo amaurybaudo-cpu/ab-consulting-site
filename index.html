@@ -55,10 +55,11 @@
   <button id="ab-btn-fr" class="active" onclick="abSetLang('fr')">FR</button>
   <button id="ab-btn-en" onclick="abSetLang('en')">EN</button>
 </div>
+<script src="/assets/translations.js"></script>
 <script>
 var _abLang = localStorage.getItem('ab_lang') || 'fr';
 function abSetLang(l){
-  _abLang = l;
+  if (l === _abLang) return;
   localStorage.setItem('ab_lang', l);
   document.getElementById('ab-btn-fr').classList.toggle('active', l==='fr');
   document.getElementById('ab-btn-en').classList.toggle('active', l==='en');
@@ -66,7 +67,17 @@ function abSetLang(l){
   document.title = l==='en'
     ? 'AB Consulting — Supply Chain & Automation Excellence'
     : 'AB Consulting — Excellence en Supply Chain & Automatisation';
+  // Reload so React re-renders cleanly, translations applied on mount
+  setTimeout(function(){ window.location.reload(); }, 80);
 }
-document.addEventListener('DOMContentLoaded', function(){ abSetLang(_abLang); });
+document.addEventListener('DOMContentLoaded', function(){
+  _abLang = localStorage.getItem('ab_lang') || 'fr';
+  document.getElementById('ab-btn-fr').classList.toggle('active', _abLang==='fr');
+  document.getElementById('ab-btn-en').classList.toggle('active', _abLang==='en');
+  document.documentElement.lang = _abLang;
+  document.title = _abLang==='en'
+    ? 'AB Consulting — Supply Chain & Automation Excellence'
+    : 'AB Consulting — Excellence en Supply Chain & Automatisation';
+});
 </script></body>
 </html>
