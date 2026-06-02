@@ -1,0 +1,13 @@
+{
+  "name": "ab-consulting-site",
+  "version": "1.0.0",
+  "description": "AB Consulting — Excellence en Supply Chain & Automatisation",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}
